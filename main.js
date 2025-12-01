@@ -1,89 +1,64 @@
-canvas = document.getElementById("myCanvas")
-turtle = canvas.getContext("2d")
-ctx = canvas.getContext('2d');
-backgroundImage = new Image();
-verificar = "lapis"
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
-function lapis(){
-    verificar = "lapis"
-}
-function borracha(){
-    verificar = "borracha"
-}
+let ferramenta = "lapis";
+let clicado = false;
+let x = 0;
+let y = 0;
 
-
-
-// backgroundImage.onload = function() {
-//   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-// };
-
-// backgroundImage.src = "a1_listening.png";
-
-
-
-clicado = false
-
-
-
-canvas.addEventListener("mousedown", desenharCirculo)
-
-function desenharCirculo(a) {
-    clicado = true
-    
-    x = a.clientX - canvas.offsetLeft
-    y = a.clientY - canvas.offsetTop
-    console.log("x: " + x)
-    console.log("y: " + y)
-    // if(verificar=="borracha"){
-    //     turtle.clearRect(x,y,5,5)
-    // }
-    // turtle.beginPath()
-    // turtle.arc(x, y, 20, 0, 2 * Math.PI)
-    // turtle.stroke()
+function ajustarCanvas() {
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
 }
 
-canvas.addEventListener("mousemove", desenhar)
+window.addEventListener("load", ajustarCanvas);
+window.addEventListener("resize", ajustarCanvas);
 
-function desenhar(a) {
-    x2 = a.clientX - canvas.offsetLeft
-    y2 = a.clientY - canvas.offsetTop
-    cor = document.getElementById("cor").value
-    turtle.globalAlpha = 0.3
-
-    ctx.strokeStyle=cor
-    ctx.lineWidth=5
-    if (clicado == true && verificar=="lapis") {
-        turtle.beginPath()
-        turtle.moveTo(x, y)
-        turtle.lineTo(x2, y2)
-        turtle.stroke()
-    }
-    // if(clicado == true && verificar=="borracha"){
-    //     turtle.clearRect(x,y,20,20)
-    // }
-     x=x2
-     y=y2
+function setFerramenta(tipo) {
+  ferramenta = tipo;
 }
 
-canvas.addEventListener("mouseup", parar)
-
-function parar() {
-    clicado = false
+function getMousePos(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
 }
-// ctx.beginPath();
-// ctx.moveTo(xinicial,yinicial)
-// ctx.lineTo(xfinal,yfinal)
-// ctx.stroke()
 
+canvas.addEventListener("mousedown", (e) => {
+  clicado = true;
+  const pos = getMousePos(e);
+  x = pos.x;
+  y = pos.y;
+});
 
+canvas.addEventListener("mouseup", () => {
+  clicado = false;
+});
 
+canvas.addEventListener("mousemove", (e) => {
+  if (!clicado) return;
 
-function part2(){
-    // window.confirm("Você não poderá voltar aqui. Tenha certeza de tirar uma foto antes de prosseguir!")
-    if (confirm("Você não poderá voltar aqui. Tenha certeza de tirar uma foto antes de prosseguir! \nSó clique em OK quando já tiver tirado uma foto e registrado")) {
-     window.location="part2.html"
-  } else {
-   
+  const pos = getMousePos(e);
+  const x2 = pos.x;
+  const y2 = pos.y;
+
+  if (ferramenta === "lapis") {
+    ctx.strokeStyle = document.getElementById("cor").value;
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.globalAlpha = 0.3;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
   }
-   
-}
+
+  if (ferramenta === "borracha") {
+    ctx.clearRect(x2 - 10, y2 - 10, 20, 20);
+  }
+
+  x = x2;
+  y = y2;
+});
