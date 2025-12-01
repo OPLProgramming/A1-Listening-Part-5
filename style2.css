@@ -1,0 +1,80 @@
+.bodyBackgorund {
+    background-image: url("bg8.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+/* body{
+
+  } */
+h1 {
+    color: black;
+
+}
+
+#myCanvas {
+    border-width: 10px;
+    background-image: url("part2.png");
+    background-repeat: no-repeat;
+    border-style: ridge;
+}
+
+  button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 5px 20px;
+    font-size: 16px;
+    margin: 5px;
+  }
+
+input {
+    margin-right: 20px;
+}
+
+#img2 {
+    width: 462px;
+    height: 641px;
+    background-image: url("part2.png");
+
+}
+
+#a1 {
+    position: relative;
+    width: 120px;
+    left: 280px;
+    top: 306px;
+}
+
+#a2 {
+    position: relative;
+    width: 120px;
+    left: 90px;
+    top: 390px;
+}
+
+#a3 {
+    position: relative;
+    width: 120px;
+    left: -55px;
+    top: 455px;
+
+}
+
+#a4 {
+    position: relative;
+    width: 120px;
+    left: 140px;
+    top: 520px;
+        
+}
+
+#a5 {
+    position: relative;
+    width: 90px;
+    left: -5px;
+    top: 580px;
+
+}
+

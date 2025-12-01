@@ -1,0 +1,37 @@
+.bodyBackgorund {
+    background-image: url("bg8.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  /* body{
+
+  } */
+  h1
+  {
+      color: black; 
+
+  }
+  #myCanvas
+  {
+      border-width:10px;
+      background-image: url("part5.png");
+      background-repeat: no-repeat;
+      border-style:ridge;
+      margin: 5px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 5px 20px;
+    font-size: 16px;
+    margin: 5px;
+  }
+
+  input
+  {
+    margin-right: 20px;
+  }
+  
